@@ -94,7 +94,7 @@ public:
     }
 
     void reset(T* t) noexcept {
-        if(this == nullptr) {return *this;}
+        if(this == nullptr) {return;}
         if(deleter){
             deleter->del(data);
         } else {
@@ -107,7 +107,7 @@ public:
 
     template<typename D>
     void reset(T* t, D d) {
-        if(this == nullptr) {return *this;}
+        if(this == nullptr) {return;}
         if(deleter){
             deleter->del(data);
         } else {
@@ -154,32 +154,32 @@ void swap( unique_ptr<T>& lhs, unique_ptr<T>& rhs ) noexcept {
 
 template<class T1, class T2>
 bool operator==(const unique_ptr<T1>& x, const unique_ptr<T2>& y) {
-    x.get() == y.get();
+    return x.get() == y.get();
 }
 
 template<class T1, class T2>
 bool operator!=(const unique_ptr<T1>& x, const unique_ptr<T2>& y) {
-    x.get() != y.get();
+    return x.get() != y.get();
 }
 
 template<class T1, class T2>
 bool operator<(const unique_ptr<T1>& x, const unique_ptr<T2>& y) {
-    x.get() < y.get();
+    return x.get() < y.get();
 }
 
 template<class T1, class T2>
 bool operator<=(const unique_ptr<T1>& x, const unique_ptr<T2>& y) {
-    x.get() <= y.get();
+    return x.get() <= y.get();
 }
 
 template<class T1, class T2>
 bool operator>(const unique_ptr<T1>& x, const unique_ptr<T2>& y) {
-    x.get() > y.get();
+    return x.get() > y.get();
 }
 
 template<class T1, class T2>
 bool operator>=(const unique_ptr<T1>& x, const unique_ptr<T2>& y) {
-    x.get() >= y.get();
+    return x.get() >= y.get();
 }
 
 }
