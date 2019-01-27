@@ -40,7 +40,7 @@ public:
     explicit unique_ptr(T* p) noexcept : data(p), deleter(nullptr){}
 
     template<typename D>
-    explicit unique_ptr(T* p, D d) noexcept : data(p), deleter(new model<D>(d)){}
+    explicit unique_ptr(T* p, D d) : data(p), deleter(new model<D>(d)){}
 
     unique_ptr( unique_ptr&& u ) noexcept {
         data = std::move(u.data);
@@ -106,7 +106,7 @@ public:
     }
 
     template<typename D>
-    void reset(T* t, D d) noexcept {
+    void reset(T* t, D d) {
         if(this == nullptr) {return *this;}
         if(deleter){
             deleter->del(data);
@@ -129,10 +129,10 @@ public:
     }
 
     explicit operator bool() const noexcept {
-        return data == nullptr;
+        return data != nullptr;
     }
 
-    T& operator*() const {
+    T& operator*() const noexcept {
         return *data;
     }
 
