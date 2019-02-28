@@ -43,8 +43,8 @@ public:
     explicit unique_ptr(T* p, D d) : data(p), deleter(new model<D>(d)){}
 
     unique_ptr( unique_ptr&& u ) noexcept {
-        data = std::move(u.data);
-        deleter = std::move(u.deleter);
+        data = u.data;
+        deleter = u.deleter;
         u.data = nullptr;
         u.deleter = nullptr;
     }
@@ -66,8 +66,8 @@ public:
             delete data;
         }
         delete deleter;
-        data = std::move(r.data);
-        deleter = std::move(r.deleter);
+        data = r.data;
+        deleter = r.deleter;
         r.data = nullptr;
         r.deleter = nullptr;
         return *this;
